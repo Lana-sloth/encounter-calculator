@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { EncounterComponent } from './encounter.component';
 
@@ -9,7 +10,8 @@ import { EncounterComponent } from './encounter.component';
     EncounterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [],
   exports: [EncounterComponent]
