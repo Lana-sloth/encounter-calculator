@@ -13,6 +13,8 @@ import { Component } from '@angular/core';
       </tr>
     </table>
     <button (click)='calculate()'>Calculate</button>
+
+    <br><br>
     
     <div *ngIf='encounter.easy > 0'>
       <div>Easy: {{ encounter.easy }} xp</div>
@@ -30,24 +32,34 @@ export class EncounterComponent {
     { lvl: 1, easy: 25, medium: 50, hard: 75, deadly: 100 },
     { lvl: 2, easy: 50, medium: 100, hard: 150, deadly: 200 }
   ]
-  encounter = { easy: 0, medium: 0, hard: 0, deadly: 0};
+  encounter = { easy: 25, medium: 50, hard: 75, deadly: 100 };
+
   calculate(){
     this.encounter = { easy: 0, medium: 0, hard: 0, deadly: 0};
-    let length = this.players.length
-    for(let i = 0; i < length; i ++) {
-      if(this.players[i].lvl == this.xpTable[i].lvl) {
-        let easy = this.encounter.easy + this.players[i].amount*this.xpTable[i].easy;
-        let medium = this.encounter.medium + this.players[i].amount*this.xpTable[i].medium;
-        let hard = this.encounter.hard + this.players[i].amount*this.xpTable[i].hard;
-        let deadly = this.encounter.deadly + this.players[i].amount*this.xpTable[i].deadly;
+    let plLength = this.players.length;
+    let xpLength = this.xpTable.length;
+    let en = this.encounter;
+    let pl = this.players;
+    let xp = this.xpTable;
 
-        this.encounter = {
-          easy: easy,
-          medium: medium,
-          hard: hard,
-          deadly: deadly
+    for(let i = 0; i < plLength; i ++) {
+      for(let a = 0; a < xpLength; a ++){
+        if(this.players[i].lvl == this.xpTable[a].lvl) {
+  
+          let easy = en.easy + pl[i].amount * xp[a].easy;
+          let medium = en.medium + pl[i].amount * xp[a].medium;
+          let hard = en.hard + pl[i].amount * xp[a].hard;
+          let deadly = en.deadly + pl[i].amount * xp[a].deadly;
+  
+          this.encounter = {
+            easy: easy,
+            medium: medium,
+            hard: hard,
+            deadly: deadly
+          }
         }
-      } 
+      }
     }
-  }
+  } // end of calculate function
+
 }
